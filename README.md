@@ -1,5 +1,37 @@
 [![Build Status](https://travis-ci.org/adamtornhill/code-maat.png)](https://travis-ci.org/adamtornhill/code-maat)
 
+
+# Quick run
+
+1. `docker build -t code-maat-test https://raw.githubusercontent.com/sbussard/code-maat/master/Dockerfile.remote`
+2. Run this in the repo you want to analyze `git log --pretty=format:'[%h] %aN %ad %s' --date=short --numstat --after=2015-01-01 > ~/Desktop/git.log`
+3. Run this chunk and it will output to a folder called `output`
+
+```
+cd ~/Desktop
+YOUR_DESKTOP_FOLDER=`pwd` # Mac
+mkdir output
+
+docker run --rm -v $YOUR_DESKTOP_FOLDER:/codemaat code-maat -l /codemaat/git.log -c git -a age > output/age.csv
+docker run --rm -v $YOUR_DESKTOP_FOLDER:/codemaat code-maat -l /codemaat/git.log -c git -a abs-churn > output/abs-churn.csv
+docker run --rm -v $YOUR_DESKTOP_FOLDER:/codemaat code-maat -l /codemaat/git.log -c git -a author-churn > output/author-churn.csv
+docker run --rm -v $YOUR_DESKTOP_FOLDER:/codemaat code-maat -l /codemaat/git.log -c git -a authors > output/authors.csv
+docker run --rm -v $YOUR_DESKTOP_FOLDER:/codemaat code-maat -l /codemaat/git.log -c git -a communication > output/communication.csv
+docker run --rm -v $YOUR_DESKTOP_FOLDER:/codemaat code-maat -l /codemaat/git.log -c git -a coupling > output/coupling.csv
+docker run --rm -v $YOUR_DESKTOP_FOLDER:/codemaat code-maat -l /codemaat/git.log -c git -a entity-churn > output/entity-churn.csv
+docker run --rm -v $YOUR_DESKTOP_FOLDER:/codemaat code-maat -l /codemaat/git.log -c git -a entity-effort > output/entity-effort.csv
+docker run --rm -v $YOUR_DESKTOP_FOLDER:/codemaat code-maat -l /codemaat/git.log -c git -a entity-ownership > output/entity-ownership.csv
+docker run --rm -v $YOUR_DESKTOP_FOLDER:/codemaat code-maat -l /codemaat/git.log -c git -a fragmentation > output/fragmentation.csv
+docker run --rm -v $YOUR_DESKTOP_FOLDER:/codemaat code-maat -l /codemaat/git.log -c git -a identity > output/identity.csv
+docker run --rm -v $YOUR_DESKTOP_FOLDER:/codemaat code-maat -l /codemaat/git.log -c git -a main-dev > output/main-dev.csv
+docker run --rm -v $YOUR_DESKTOP_FOLDER:/codemaat code-maat -l /codemaat/git.log -c git -a main-dev-by-revs > output/main-dev-by-revs.csv
+docker run --rm -v $YOUR_DESKTOP_FOLDER:/codemaat code-maat -l /codemaat/git.log -c git -a messages > output/messages.csv
+docker run --rm -v $YOUR_DESKTOP_FOLDER:/codemaat code-maat -l /codemaat/git.log -c git -a refactoring-main-dev > output/refactoring-main-dev.csv
+docker run --rm -v $YOUR_DESKTOP_FOLDER:/codemaat code-maat -l /codemaat/git.log -c git -a revisions > output/revisions.csv
+docker run --rm -v $YOUR_DESKTOP_FOLDER:/codemaat code-maat -l /codemaat/git.log -c git -a soc > output/soc.csv
+docker run --rm -v $YOUR_DESKTOP_FOLDER:/codemaat code-maat -l /codemaat/git.log -c git -a summary > output/summary.csv
+```
+
 # Code Maat
 
 Code Maat is a command line tool used to mine and analyze data from version-control systems (VCS).
